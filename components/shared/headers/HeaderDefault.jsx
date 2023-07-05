@@ -4,8 +4,6 @@ import SearchHeader from '~/components/shared/headers/modules/SearchHeader';
 import NavigationDefault from '~/components/shared/navigation/NavigationDefault';
 import HeaderActions from '~/components/shared/headers/modules/HeaderActions';
 import { stickyHeader } from '~/utilities/common-helpers';
-import MenuCategoriesDropdown from '~/components/shared/menus/MenuCategoriesDropdown';
-
 const HeaderDefault = () => {
     useEffect(() => {
         if (process.browser) {
@@ -14,15 +12,16 @@ const HeaderDefault = () => {
     }, []);
 
     return (
+        <>
         <header
             className="header header--1"
             data-sticky="true"
             id="headerSticky">
+            <NavigationDefault />
             <div className="header__top">
                 <div className="ps-container">
                     <div className="header__left">
                         <Logo />
-                        <MenuCategoriesDropdown />
                     </div>
                     <div className="header__center">
                         <SearchHeader />
@@ -31,9 +30,13 @@ const HeaderDefault = () => {
                         <HeaderActions />
                     </div>
                 </div>
+             ,
             </div>
-            <NavigationDefault />
+            
         </header>
+
+        
+        </>
     );
 };
 

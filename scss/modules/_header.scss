@@ -1,6 +1,6 @@
 .header {
     @extend %list-reset;
-
+    
     .header__extra {
         display: inline-block;
         position: relative;
@@ -73,7 +73,7 @@
     .header__top {
         padding: 25px 0;
         background-color: $color-1st;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+        border: none;
 
         .ps-container,
         .container {
