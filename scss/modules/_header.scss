@@ -46,7 +46,7 @@
     .header__actions {
         display: flex;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: center;
 
         > * {
             margin: 0 20px;
@@ -71,7 +71,8 @@
     }
 
     .header__top {
-        padding: 25px 0;
+        padding: 25px 150px;
+        padding-bottom:0px !important;
         background-color: $color-1st;
         border: none;
 
@@ -444,7 +445,7 @@
         flex-flow: row nowrap;
         justify-content: space-between;
         background-color: #f4f5f5;
-        padding: 15px 30px;
+        padding: 10px 30px;
 
         > * {
             width: 100%;
@@ -666,7 +667,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 10px;
+            padding: 10px 10px;
 
             i {
                 margin-right: 10px;

@@ -182,21 +182,23 @@
 }
 
 .menu {
-    text-align: left;
+    text-align: center;
 
     > li {
         display: inline-block;
+        padding-top: 10px;
+        padding-bottom:5px;
 
         > a {
             display: inline-block;
-            padding: 15px 25px;
             font-size: 16px;
             font-weight: 400;
             line-height: 20px;
             color: $color-heading;
+            padding-left:10px;
 
             &:hover {
-                color: $color-heading;
+                color: white;
             }
         }
 

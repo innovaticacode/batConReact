@@ -4,6 +4,9 @@ import SearchHeader from '~/components/shared/headers/modules/SearchHeader';
 import NavigationDefault from '~/components/shared/navigation/NavigationDefault';
 import HeaderActions from '~/components/shared/headers/modules/HeaderActions';
 import { stickyHeader } from '~/utilities/common-helpers';
+import Menu from '../../elements/menu/Menu';
+import menuData from '../../../public/static/data/menu';
+
 const HeaderDefault = () => {
     useEffect(() => {
         if (process.browser) {
@@ -30,7 +33,10 @@ const HeaderDefault = () => {
                         <HeaderActions />
                     </div>
                 </div>
-             ,
+                <Menu  
+                source={menuData.menuPrimary.menu_1}
+                className="menu"
+                />
             </div>
             
         </header>
