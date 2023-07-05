@@ -16,7 +16,7 @@ const BannerItem = ({ source }) => {
             <Link href="/shop">
                 <a>
                     <a className="ps-collection">
-                        <img src="/static/img/not-found.jpg" alt="martfury" />
+                        <img src="/static/img/categories/1.jpg" alt="martfury" />
                     </a>
                 </a>
             </Link>
