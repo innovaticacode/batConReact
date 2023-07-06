@@ -22,23 +22,10 @@ const HeaderMarketPlace4 = () => {
             <div className="header__top">
                 <div className="container">
                     <div className="header__left">
-                        <p>Welcome to Martfury Online Shopping Store !</p>
+                        <p>Welcome to BatCon Online Shopping Store !</p>
                     </div>
                     <div className="header__right">
                         <ul className="header__top-links">
-                            <li>
-                                <Link href="/vendor/store-list">
-                                    <a>Store Location</a>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/page/blank">
-                                    <a>Track Your Order</a>
-                                </Link>
-                            </li>
-                            <li>
-                                <CurrencyDropdown />
-                            </li>
                             <li>
                                 <LanguageSwicher />
                             </li>
@@ -49,7 +36,7 @@ const HeaderMarketPlace4 = () => {
             <div className="header__content">
                 <div className="container">
                     <div className="header__content-left">
-                        <Link href="/home/market-place-4">
+                        <Link href="/">
                             <a className="ps-logo">
                                 <img
                                     src="/static/img/logo_light.png"

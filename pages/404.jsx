@@ -2,12 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 
 import FooterDefault from '../components/shared/footers/FooterDefault';
-import HeaderDefault from '../components/shared/headers/HeaderDefault';
+import HeaderMarketPlace4 from '../components/shared/headers/HeaderMarketPlace4';
 
 function Error({ statusCode }) {
     return (
         <div className="site-content">
-            <HeaderDefault />
+            <HeaderMarketPlace4 />
             <div className="ps-page--404">
                 <div className="container">
                     <div className="ps-section__content">
