@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
 
-class MyAccount extends Component {
+class CompanyPortfolio extends Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -24,7 +24,7 @@ class MyAccount extends Component {
                                     </div>
                                     <div className="ps-widget__content">
                                         <ul>
-                                            <li className="active">
+                                            <li>
                                                 <Link href="/account/my-account">
                                                     <a>Notification</a>
                                                 </Link>
@@ -39,7 +39,7 @@ class MyAccount extends Component {
                                                     <a>Company Details</a>
                                                 </Link>
                                             </li>
-                                            <li>
+                                            <li className="active">
                                                 <Link href="/account/company-portfolio">
                                                     <a>
                                                         Company Portfolio
@@ -70,30 +70,32 @@ class MyAccount extends Component {
                         <div className="col-lg-9">
                             <div className="ps-page__content">
                                 <div className="ps-page__dashboard">
-                                    <p>
-                                        Hello <strong>user@gmail.com</strong>!
-                                    </p>
-                                    <p>
-                                        From your account dashboard you can view
-                                        your{' '}
-                                        <Link href="/account/orders">
-                                            <a>recent orders</a>
-                                        </Link>
-                                        , manage your{' '}
-                                        <Link href="/account/user-information">
-                                            <a>
-                                                shipping and billing addresses
-                                            </a>
-                                        </Link>
-                                        , and{' '}
-                                        <Link href="/account/user-information">
-                                            <a>
-                                                edit your password and account
-                                                details
-                                            </a>
-                                        </Link>
-                                        .
-                                    </p>
+                                    <table className="ps-table w-100">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div
+                                                        className="ps-empty-table"
+                                                        style={{
+                                                            display: 'flex',
+                                                            justifyContent:
+                                                                'space-between',
+                                                            alignItems:
+                                                                'center',
+                                                        }}>
+                                                        <p>
+                                                            <i className="fa fa-check-circle mr-3"></i>
+                                                            No order has been
+                                                            made yet.
+                                                        </p>
+                                                        <button className="ps-btn ps-btn--primary">
+                                                            Add New Product
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -104,4 +106,4 @@ class MyAccount extends Component {
     }
 }
 
-export default MyAccount;
+export default CompanyPortfolio;

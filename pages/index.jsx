@@ -1,41 +1,45 @@
 import React from 'react';
-import SiteFeatures from '~/components/partials/homepage/home-default/SiteFeatures';
-import HomeAdsColumns from '~/components/partials/homepage/home-default/HomeAdsColumns';
-import HomeAds from '~/components/partials/homepage/home-default/HomeAds';
-import DownLoadApp from '~/components/partials/commons/DownLoadApp';
-import NewArrivals from '~/components/partials/homepage/home-default/NewArrivals';
-import Newletters from '~/components/partials/commons/Newletters';
-import HomeDefaultDealOfDay from '~/components/partials/homepage/home-default/HomeDefaultDealOfDay';
-import HomeDefaultTopCategories from '~/components/partials/homepage/home-default/HomeDefaultTopCategories';
-import HomeDefaultProductListing from '~/components/partials/homepage/home-default/HomeDefaultProductListing';
-import HomeDefaultBanner from '~/components/partials/homepage/home-default/HomeDefaultBanner';
+import MartketPlace4Banner from '~/components/partials/homepage/marketplace4/MartketPlace4Banner';
+import MartketPlace4SiteFeatures from '~/components/partials/homepage/marketplace4/MartketPlace4SiteFeatures';
+import MartketPlace4Promotions from '~/components/partials/homepage/marketplace4/MartketPlace4Promotions';
+import MartketPlace4TopCategories from '~/components/partials/homepage/marketplace4/MartketPlace4TopCategories';
+import CategoriesBoxConsumerElectronics from '~/components/partials/homepage/marketplace4/modules/CategoriesBoxConsumerElectronics';
+import CategoriesBoxClothings from '~/components/partials/homepage/marketplace4/modules/CategoriesBoxClothings';
+import CategoriesBoxGardenAndKitchen from '~/components/partials/homepage/marketplace4/modules/CategoriesBoxGardenAndKitchen';
+import ProductGroupDealHot from '~/components/partials/product/ProductGroupDealHot';
+import HeaderMarketPlace4 from '~/components/shared/headers/HeaderMarketPlace4';
+import HeaderMobile from '~/components/shared/headers/HeaderMobile';
+import FooterMarketPlace2 from '~/components/shared/footers/FooterMarketPlace2';
 import PageContainer from '~/components/layouts/PageContainer';
 
 const HomepageDefaultPage = () => {
+    const headers = (
+        <>
+            <HeaderMarketPlace4 />
+            <HeaderMobile />
+        </>
+    );
+    const footer = <FooterMarketPlace2 />;
     return (
-        <PageContainer title="Multipurpose Marketplace React Ecommerce Template">
-            <main id="homepage-1">
-                <HomeDefaultBanner />
-                <SiteFeatures />
-                <HomeDefaultDealOfDay collectionSlug="deal-of-the-day" />
-                <HomeAdsColumns />
-                <HomeDefaultTopCategories />
-                <HomeDefaultProductListing
-                    collectionSlug="consumer-electronics"
-                    title="Consumer Electronics"
-                />
-                <HomeDefaultProductListing
-                    collectionSlug="clothings"
-                    title="Clothings"
-                />
-                <HomeDefaultProductListing
-                    collectionSlug="garden-and-kitchen"
-                    title="Garden & Kitchen"
-                />
-                <HomeAds />
-                <DownLoadApp />
-                <NewArrivals collectionSlug="new-arrivals-products" />
-                <Newletters />
+        <PageContainer
+            header={headers}
+            footer={footer}
+            title="Home Marketplace v4">
+            <main id="homepage-6">
+                <MartketPlace4Banner />
+                <div className="container">
+                    <MartketPlace4SiteFeatures />
+                    <MartketPlace4Promotions />
+                    <ProductGroupDealHot collectionSlug="deal-of-the-day" />
+                    <MartketPlace4TopCategories />
+                </div>
+                <div className="ps-categories-box">
+                    <div className="container">
+                        <CategoriesBoxConsumerElectronics />
+                        <CategoriesBoxClothings />
+                        <CategoriesBoxGardenAndKitchen />
+                    </div>
+                </div>
             </main>
         </PageContainer>
     );

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { login } from '../../../store/auth/action';
 
-import { Form, Input } from 'antd';
+import { Form, Input, Checkbox } from 'antd';
 import { connect } from 'react-redux';
 
 class Register extends Component {
@@ -12,7 +12,7 @@ class Register extends Component {
         this.state = {};
     }
 
-    handleSubmit = e => {
+    handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -24,6 +24,8 @@ class Register extends Component {
     };
 
     render() {
+        const { formInstance } = this.props;
+
         return (
             <div className="ps-my-account">
                 <div className="container">
@@ -79,38 +81,37 @@ class Register extends Component {
                                         />
                                     </Form.Item>
                                 </div>
-                                <div className="form-group submit">
+                                <div className="form-group">
+                                    <Form.Item
+                                        name="termsAndConditions"
+                                        valuePropName="checked"
+                                        rules={[
+                                            {
+                                                validator: (_, value) =>
+                                                    value
+                                                        ? Promise.resolve()
+                                                        : Promise.reject(
+                                                              new Error(
+                                                                  'You must accept the terms and conditions'
+                                                              )
+                                                          ),
+                                            },
+                                        ]}>
+                                        <Checkbox>
+                                            I have read and agree to the{' '}
+                                            <a href="/terms" target="_blank">
+                                                Terms and Conditions
+                                            </a>
+                                        </Checkbox>
+                                    </Form.Item>
+                                </div>
+                                <div className="form-group submit ">
                                     <button
                                         type="submit"
-                                        className="ps-btn ps-btn--fullwidth">
+                                        className="ps-btn ps-btn--fullwidth mb-5">
                                         Register
                                     </button>
                                 </div>
-                            </div>
-                            <div className="ps-form__footer">
-                                <p>Connect with:</p>
-                                <ul className="ps-list--social">
-                                    <li>
-                                        <a className="facebook" href="#">
-                                            <i className="fa fa-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="google" href="#">
-                                            <i className="fa fa-google-plus"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="twitter" href="#">
-                                            <i className="fa fa-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="instagram" href="#">
-                                            <i className="fa fa-instagram"></i>
-                                        </a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </Form>
@@ -120,7 +121,7 @@ class Register extends Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return state.auth;
 };
 export default connect(mapStateToProps)(Register);
