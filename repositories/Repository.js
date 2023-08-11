@@ -1,7 +1,7 @@
 import axios from 'axios';
-const baseDomain = 'http://localhost:1337'; // API for products
-export const basePostUrl = 'http://localhost:1337'; // API for post
-export const baseStoreURL = 'http://localhost:1337'; // API for vendor(store)
+const baseDomain = 'https://reactstorefronts.com/'; // API for products
+export const basePostUrl = 'https://reactstorefronts.com/'; // API for post
+export const baseStoreURL = 'https://reactstorefronts.com/'; // API for vendor(store)
 
 export const customHeaders = {
     Accept: 'application/json',
@@ -18,7 +18,7 @@ export const serializeQuery = (query) => {
     return Object.keys(query)
         .map(
             (key) =>
-                `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`
+            `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`
         )
         .join('&');
 };

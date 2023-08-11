@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
-import { login } from '../../../store/auth/action';
-
 import { Form, Input, notification } from 'antd';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
+const API_URL = 'http://127.0.0.1:8000/api/';
 
 class Login extends Component {
     constructor(props) {
@@ -12,15 +14,9 @@ class Login extends Component {
         this.state = {};
     }
 
-    static getDerivedStateFromProps(props) {
-        if (props.isLoggedIn === true) {
-            Router.push('/');
-        }
-        return false;
-    }
-
     handleFeatureWillUpdate(e) {
         e.preventDefault();
+        e.stopPropagation();
         notification.open({
             message: 'Opp! Something went wrong.',
             description: 'This feature has been updated later!',
@@ -28,11 +24,39 @@ class Login extends Component {
         });
     }
 
-    handleLoginSubmit = e => {
-        console.log('test');
-        this.props.dispatch(login());
-        Router.push('/');
+    handleLoginSubmit = async (values) => {
+        const { email, password } = values;
+        try {
+            const response = await axios.post(API_URL + 'login', {
+                email,
+                password,
+            });
 
+            if (response.data.status === 200) {
+                if (response.data.status === 0) {
+                    notification.warning({
+                        message: 'Account Suspended',
+                        description:
+                            'Sorry, your account has been suspended because your trial period has expired. Please contact the administrator.',
+                        duration: 5,
+                    });
+                } else {
+                    Cookies.set('user', response.data.access_token, {
+                        expires: 7,
+                    });
+                    Cookies.set('isLoggedIn', true);
+                    Cookies.set('userID', response.data.id);
+                    localStorage.setItem('user', JSON.stringify(response.data));
+                    Router.push('/account/my-account');
+                }
+            } else if (response.data.statusCode === 'error') {
+                localStorage.setItem('user', response.data.validation_error);
+            } else if (response.data.statusCode === 'failed') {
+                localStorage.setItem('user', response.data.message);
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     render() {
@@ -59,7 +83,7 @@ class Login extends Component {
                                 <h5>Log In Your Account</h5>
                                 <div className="form-group">
                                     <Form.Item
-                                        name="username"
+                                        name="email"
                                         rules={[
                                             {
                                                 required: true,
@@ -68,9 +92,12 @@ class Login extends Component {
                                             },
                                         ]}>
                                         <Input
+                                            ref={(input) =>
+                                                (this.emailInput = input)
+                                            }
                                             className="form-control"
-                                            type="text"
-                                            placeholder="Username or email address"
+                                            type="email"
+                                            placeholder="Email address"
                                         />
                                     </Form.Item>
                                 </div>
@@ -119,7 +146,7 @@ class Login extends Component {
                                         <a
                                             className="facebook"
                                             href="#"
-                                            onClick={e =>
+                                            onClick={(e) =>
                                                 this.handleFeatureWillUpdate(e)
                                             }>
                                             <i className="fa fa-facebook"></i>
@@ -129,7 +156,7 @@ class Login extends Component {
                                         <a
                                             className="google"
                                             href="#"
-                                            onClick={e =>
+                                            onClick={(e) =>
                                                 this.handleFeatureWillUpdate(e)
                                             }>
                                             <i className="fa fa-google-plus"></i>
@@ -139,7 +166,7 @@ class Login extends Component {
                                         <a
                                             className="twitter"
                                             href="#"
-                                            onClick={e =>
+                                            onClick={(e) =>
                                                 this.handleFeatureWillUpdate(e)
                                             }>
                                             <i className="fa fa-twitter"></i>
@@ -149,7 +176,7 @@ class Login extends Component {
                                         <a
                                             className="instagram"
                                             href="#"
-                                            onClick={e =>
+                                            onClick={(e) =>
                                                 this.handleFeatureWillUpdate(e)
                                             }>
                                             <i className="fa fa-instagram"></i>
@@ -164,7 +191,7 @@ class Login extends Component {
         );
     }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return state.auth;
 };
 export default connect(mapStateToProps)(Login);

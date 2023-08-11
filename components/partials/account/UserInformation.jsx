@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
 import FormChangeUserInformation from '~/components/shared/FormChangeUserInformation';
+import Cookies from 'js-cookie';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const UserInformation = () => {
+    const API_URL = 'http://127.0.0.1:8000/api/';
+    const router = useRouter();
+
     const accountLinks = [
         {
             text: 'Account Information',
@@ -49,6 +55,24 @@ const UserInformation = () => {
         </li>
     ));
 
+    const onLogoutHandler = () => {
+        axios
+            .post(API_URL + 'logout')
+            .then((response) => {
+                Cookies.set('user', '');
+                Cookies.set('userID', '');
+                Cookies.set('isLoggedIn', false);
+                localStorage.removeItem('user');
+                router.push('/account/login');
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
+
+
+
     return (
         <section className="ps-my-account ps-page--account">
             <div className="container">
@@ -82,13 +106,11 @@ const UserInformation = () => {
                                                 </Link>
                                             </li>
                                         ))}
-                                        <li>
-                                            <Link href="/account/my-account">
-                                                <a>
-                                                    <i className="icon-power-switch"></i>
-                                                    Logout
-                                                </a>
-                                            </Link>
+                                        <li onClick={onLogoutHandler}>
+                                            <a>
+                                                <i className="icon-power-switch"></i>
+                                                Logout
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>

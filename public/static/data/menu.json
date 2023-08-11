@@ -1,13 +1,11 @@
 {
     "menuPrimary": {
-        "menu_1": [
-            {
+        "menu_1": [{
                 "text": "Home",
                 "url": "/",
                 "extraClass": "menu-item-has-children",
                 "subClass": "sub-menu",
-                "subMenu": [
-                    {
+                "subMenu": [{
                         "text": "Marketplace Full Width",
                         "url": "/"
                     },
@@ -55,11 +53,9 @@
                 "extraClass": "menu-item-has-children has-mega-menu",
                 "subClass": "sub-menu",
                 "mega": "true",
-                "megaContent": [
-                    {
+                "megaContent": [{
                         "heading": "Catalog Pages",
-                        "megaItems": [
-                            {
+                        "megaItems": [{
                                 "text": "Shop Default",
                                 "url": "/shop"
                             },
@@ -87,8 +83,7 @@
                     },
                     {
                         "heading": "Product Layout",
-                        "megaItems": [
-                            {
+                        "megaItems": [{
                                 "text": "Default",
                                 "url": "/product/3"
                             },
@@ -112,8 +107,7 @@
                     },
                     {
                         "heading": "Product Types",
-                        "megaItems": [
-                            {
+                        "megaItems": [{
                                 "text": "Simple",
                                 "url": "/product/3"
                             },
@@ -145,8 +139,7 @@
                     },
                     {
                         "heading": "Ecomerce Pages",
-                        "megaItems": [
-                            {
+                        "megaItems": [{
                                 "text": "Shopping Cart",
                                 "url": "/account/shopping-cart"
                             },
@@ -184,11 +177,9 @@
                 "extraClass": "menu-item-has-children has-mega-menu",
                 "subClass": "sub-menu",
                 "mega": "true",
-                "megaContent": [
-                    {
+                "megaContent": [{
                         "heading": "Basic Page",
-                        "megaItems": [
-                            {
+                        "megaItems": [{
                                 "text": "About Us",
                                 "url": "/page/about-us"
                             },
@@ -208,8 +199,7 @@
                     },
                     {
                         "heading": "Vendor Pages",
-                        "megaItems": [
-                            {
+                        "megaItems": [{
                                 "text": "Become a Vendor",
                                 "url": "/vendor/become-a-vendor"
                             },
@@ -232,11 +222,9 @@
                 "extraClass": "menu-item-has-children has-mega-menu",
                 "subClass": "sub-menu",
                 "mega": "true",
-                "megaContent": [
-                    {
+                "megaContent": [{
                         "heading": "Blog Layout",
-                        "megaItems": [
-                            {
+                        "megaItems": [{
                                 "text": "Grid",
                                 "url": "/blog"
                             },
@@ -256,8 +244,7 @@
                     },
                     {
                         "heading": "Single Blog",
-                        "megaItems": [
-                            {
+                        "megaItems": [{
                                 "text": "Single 1",
                                 "url": "/post/default"
                             },
@@ -275,8 +262,7 @@
             }
         ]
     },
-    "product_categories": [
-        {
+    "product_categories": [{
             "icon": "icon-star",
             "text": "Hot Promotions",
             "url": "/shop"
@@ -288,11 +274,9 @@
             "extraClass": "menu-item-has-children has-mega-menu",
             "subClass": "sub-menu",
             "mega": true,
-            "megaContent": [
-                {
+            "megaContent": [{
                     "heading": "Electronic",
-                    "megaItems": [
-                        {
+                    "megaItems": [{
                             "text": "Home Audio & Theathers",
                             "url": "/shop"
                         },
@@ -328,8 +312,7 @@
                 },
                 {
                     "heading": "Accessories & Parts",
-                    "megaItems": [
-                        {
+                    "megaItems": [{
                             "text": "Digital Cables",
                             "url": "/shop"
                         },
@@ -371,49 +354,46 @@
             "url": "/shop",
             "extraClass": "menu-item-has-children has-mega-menu",
             "subClass": "sub-menu",
-            "megaContent": [
-                {
-                    "heading": "Computer & Technologies",
-                    "megaItems": [
-                        {
-                            "text": "Computer & Tablets",
-                            "url": "/shop"
-                        },
-                        {
-                            "text": "Laptop",
-                            "url": "/shop"
-                        },
-                        {
-                            "text": "Monitors",
-                            "url": "/shop"
-                        },
-                        {
-                            "text": "Networking",
-                            "url": "/shop"
-                        },
-                        {
-                            "text": "Drive & Storages",
-                            "url": "/shop"
-                        },
-                        {
-                            "text": "Computer Components",
-                            "url": "/shop"
-                        },
-                        {
-                            "text": "Security & Protection",
-                            "url": "/shop"
-                        },
-                        {
-                            "text": "Gaming Laptop",
-                            "url": "/shop"
-                        },
-                        {
-                            "text": "Accessories",
-                            "url": "/shop"
-                        }
-                    ]
-                }
-            ]
+            "megaContent": [{
+                "heading": "Computer & Technologies",
+                "megaItems": [{
+                        "text": "Computer & Tablets",
+                        "url": "/shop"
+                    },
+                    {
+                        "text": "Laptop",
+                        "url": "/shop"
+                    },
+                    {
+                        "text": "Monitors",
+                        "url": "/shop"
+                    },
+                    {
+                        "text": "Networking",
+                        "url": "/shop"
+                    },
+                    {
+                        "text": "Drive & Storages",
+                        "url": "/shop"
+                    },
+                    {
+                        "text": "Computer Components",
+                        "url": "/shop"
+                    },
+                    {
+                        "text": "Security & Protection",
+                        "url": "/shop"
+                    },
+                    {
+                        "text": "Gaming Laptop",
+                        "url": "/shop"
+                    },
+                    {
+                        "text": "Accessories",
+                        "url": "/shop"
+                    }
+                ]
+            }]
         },
         {
             "icon": "icon-baby-bottle",

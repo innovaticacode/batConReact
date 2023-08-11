@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
 import { login } from '../../../store/auth/action';
-
 import { Form, Input, Checkbox } from 'antd';
 import { connect } from 'react-redux';
 
@@ -47,6 +46,23 @@ class Register extends Component {
                         <div className="ps-tab active" id="register">
                             <div className="ps-form__content">
                                 <h5>Register An Account</h5>
+                                <div className="form-group">
+                                    <Form.Item
+                                        name="name"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message:
+                                                    'Please input your name!',
+                                            },
+                                        ]}>
+                                        <Input
+                                            className="form-control"
+                                            type="text"
+                                            placeholder="Name"
+                                        />
+                                    </Form.Item>
+                                </div>
                                 <div className="form-group">
                                     <Form.Item
                                         name="email"

@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DatePicker, Form, Input, Radio } from 'antd';
+import { useSelector } from 'react-redux';
+import Router from 'next/router';
 
 const FormChangeUserInformation = () => {
+    const { user } = useSelector((state) => state.auth);
+
+    useEffect(() => {
+        if (!user) {
+            Router.push('/account/login');
+        }
+    }, [user]);
+   
+    if (!user) {
+        return null; 
+    }
+
     return (
+        <>  
         <form className="ps-form--account-setting">
             <div className="ps-form__header">
                 <h3>Account Information</h3>
@@ -11,45 +26,30 @@ const FormChangeUserInformation = () => {
                 <div className="form-group">
                     <input
                         className="form-control"
-                        type="text"
-                        placeholder="Username or email address"
+                        type="email"
+                        value={user.email}
+                        placeholder="Email address"
                     />
                 </div>
                 <div className="row">
-                    <div className="col-sm-6">
+                    <div className="col-sm-12">
                         <div className="form-group">
                             <input
                                 className="form-control"
                                 type="text"
+                                value={user.name}
                                 placeholder="First name"
                             />
                         </div>
                     </div>
-                    <div className="col-sm-6">
-                        <div className="form-group">
-                            <input
-                                className="form-control"
-                                type="text"
-                                placeholder="Last name"
-                            />
-                        </div>
-                    </div>
 
-                    <div className="col-sm-6">
+                    <div className="col-sm-12">
                         <div className="form-group">
                             <input
                                 className="form-control"
                                 type="text"
+                                value={user.phone}
                                 placeholder="Phone Number"
-                            />
-                        </div>
-                    </div>
-                    <div className="col-sm-6">
-                        <div className="form-group">
-                            <input
-                                className="form-control"
-                                type="text"
-                                placeholder="Email Address"
                             />
                         </div>
                     </div>
@@ -62,20 +62,12 @@ const FormChangeUserInformation = () => {
                             />
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-12">
                         <div className="form-group">
                             <input
                                 className="form-control"
                                 type="text"
-                                placeholder="City"
-                            />
-                        </div>
-                    </div>
-                    <div className="col-sm-6">
-                        <div className="form-group">
-                            <input
-                                className="form-control"
-                                type="text"
+                                value={user.country}
                                 placeholder="Country"
                             />
                         </div>
@@ -86,7 +78,8 @@ const FormChangeUserInformation = () => {
                     <button className="ps-btn">Update profile</button>
                 </div>
             </div>
-        </form>
+        </form></>
+      
     );
 };
 

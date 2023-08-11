@@ -1,5 +1,5 @@
 import { all, put, takeEvery } from 'redux-saga/effects';
-import {notification } from 'antd';
+import { notification } from 'antd';
 
 import { actionTypes, loginSuccess, logOutSuccess } from './action';
 

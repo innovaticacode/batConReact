@@ -30,11 +30,12 @@ const ShopItems = ({ columns = 4, pageSize = 12 }) => {
         Router.push(`/shop?page=${page}`);
     }
 
-    async function getTotalRecords(params) {
+    async function getTotalRecords() {
         const responseData = await ProductRepository.getTotalRecords();
-        if (responseData) {
-            setTotal(responseData);
-        }
+        console.log(responseData);
+        // if (responseData) {
+        //     setTotal(responseData);
+        // }
     }
 
     function handleSetColumns() {
