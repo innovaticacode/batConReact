@@ -12,7 +12,6 @@ import {
     Button,
 } from 'antd';
 import MultiRangeSlider from './MultiRangeSlider';
-import { T } from 'antd/lib/upload/utils';
 
 function CreateProduct({ user }) {
     const [productFormFieldTitles, setProductFormFieldTitles] = useState([]);
@@ -173,7 +172,6 @@ function CreateProduct({ user }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = new FormData();
-        console.log('deneme');
 
         const requiredFieldsForTitle = selectedFormFields.filter(
             (field) => field.required === true
@@ -338,7 +336,6 @@ function CreateProduct({ user }) {
         return subtitle ? subtitle.name : '';
     };
 
-    const [expandedField, setExpandedField] = useState(null);
     const [expandedFields, setExpandedFields] = useState([]);
 
     const toggleNoteField = (fieldId) => {
@@ -348,14 +345,6 @@ function CreateProduct({ user }) {
             setExpandedFields([...expandedFields, fieldId]);
         }
     };
-
-    // const toggleNoteField = (fieldId) => {
-    //     if (expandedField === fieldId) {
-    //         setExpandedField(null);
-    //     } else {
-    //         setExpandedField(fieldId);
-    //     }
-    // };
 
     return (
         <>

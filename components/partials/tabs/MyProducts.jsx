@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { Button, Modal, notification } from 'antd';
+import EditProduct from './EditProduct';
 
 function Main({ user }) {
     const [getProducts, setGetProducts] = useState([]);
@@ -20,6 +21,7 @@ function Main({ user }) {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     const pageNumbers = [];
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+    const [isEditModalVisible, setIsEditModalVisible] = useState(false);
 
     for (let i = 1; i <= Math.ceil(getProducts.length / productsPerPage); i++) {
         pageNumbers.push(i);
@@ -68,84 +70,103 @@ function Main({ user }) {
     const productsToDisplay =
         search !== '' ? filteredProducts : currentProducts;
 
-    console.log(productsToDisplay);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
     return (
         <>
-            <div className="ps-page__dashboard">
-                <div className="table-responsive">
-                    <table className="table ps-table--whishlist">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Product name</th>
-                                <th>Category</th>
-                                <th>Management</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {productsToDisplay.length > 0
-                                ? productsToDisplay.map((product, index) => (
-                                      <tr key={product.id}>
-                                          <td>                              {indexOfFirstProduct + index + 1}
-</td>
-                                          <td>{product.name}</td>
-                                          <td>{product.title}</td>
+            {selectedProduct ? (
+                <EditProduct
+                    product={selectedProduct}
+                    user={user}
+                    onCancel={() => setSelectedProduct(null)}
+                />
+            ) : (
+                <>
+                    <div className="ps-page__dashboard">
+                        <div className="table-responsive">
+                            <table className="table ps-table--whishlist ps-table--responsive">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Product name</th>
+                                        <th>Category</th>
+                                        <th>Management</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {productsToDisplay.length > 0
+                                        ? productsToDisplay.map(
+                                              (product, index) => (
+                                                  <tr key={product.id}>
+                                                      <td data-label="No">
+                                                          {indexOfFirstProduct +
+                                                              index +
+                                                              1}
+                                                      </td>
+                                                      <td data-label="Product Name">
+                                                          {product.name}
+                                                      </td>
+                                                      <td data-label="Category">
+                                                          {product.title}
+                                                      </td>
 
-                                          <td>
-                                              <div className="d-flex align-items-center">
-                                                  <Button
-                                                      className="mr-3"
-                                                      type="button"
-                                                      onClick={(event) => {
-                                                          event.preventDefault();
-                                                          setGetProductId(
-                                                              product.id
-                                                          );
-                                                          setIsDeleteModalVisible(
-                                                              true
-                                                          );
-                                                      }}>
-                                                      <i className="fa fa-edit"></i>
-                                                  </Button>
-                                                  <Button
-                                                      type="button"
-                                                      onClick={(event) => {
-                                                          event.preventDefault();
-                                                          setGetProductId(
-                                                              product.id
-                                                          );
-                                                          setIsDeleteModalVisible(
-                                                              true
-                                                          );
-                                                      }}>
-                                                      <i className="icon-cross"></i>
-                                                  </Button>
-                                              </div>
-                                          </td>
-                                      </tr>
-                                  ))
-                                : 'Nothing else'}
-                        </tbody>
-                    </table>
-                    <div className="ps-pagination">
-                        <ul className="pagination">
-                            {pageNumbers.map((number) => (
-                                <li
-                                    key={number}
-                                    className={
-                                        number == currentPage && 'active'
-                                    }>
-                                    <a
-                                        onClick={() => paginate(number)}
-                                        href="#">
-                                        {number}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
+                                                      <td data-label="Management">
+                                                          <div className="d-flex align-items-center">
+                                                              <Button
+                                                                  className="mr-3"
+                                                                  type="button"
+                                                                  onClick={() => {
+                                                                      setSelectedProduct(
+                                                                          product
+                                                                      );
+                                                                  }}>
+                                                                  <i className="fa fa-edit"></i>
+                                                              </Button>
+                                                              <Button
+                                                                  type="button"
+                                                                  onClick={(
+                                                                      event
+                                                                  ) => {
+                                                                      event.preventDefault();
+                                                                      setGetProductId(
+                                                                          product.id
+                                                                      );
+                                                                      setIsDeleteModalVisible(
+                                                                          true
+                                                                      );
+                                                                  }}>
+                                                                  <i className="icon-cross"></i>
+                                                              </Button>
+                                                          </div>
+                                                      </td>
+                                                  </tr>
+                                              )
+                                          )
+                                        : 'Nothing else'}
+                                </tbody>
+                            </table>
+                            <div className="ps-pagination">
+                                <ul className="pagination">
+                                    {pageNumbers.map((number) => (
+                                        <li
+                                            key={number}
+                                            className={
+                                                number == currentPage &&
+                                                'active'
+                                            }>
+                                            <a
+                                                onClick={() => paginate(number)}
+                                                href="#">
+                                                {number}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </>
+            )}
 
             {/* Delete Confirmation Modal */}
             <Modal
