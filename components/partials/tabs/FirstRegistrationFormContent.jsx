@@ -315,6 +315,9 @@ const FirstRegistrationFormContent = ({
                                                     name={`${field.id}`}
                                                     className="form-control"
                                                     type={file}
+                                                    style={{
+                                                        paddingTop: '10px',
+                                                    }}
                                                     placeholder={
                                                         field.input_placeholder
                                                     }
@@ -356,36 +359,29 @@ const FirstRegistrationFormContent = ({
                                     </Form.Item>
                                 </>
                             ) : field.field_type === 'select' ? (
-                                <Form.Item
-                                    name={`${field.id}`}
-                                    valuePropName=""
-                                    rules={[
-                                        {
-                                            required: field.required,
-                                            message: `Please select an option for ${field.name.toLowerCase()}!`,
-                                        },
-                                    ]}>
-                                    <Select
+                                <div className="form-group">
+                                    <select
+                                        className="form-control"
+                                        placeholder="Select an option"
+                                        style={{
+                                            width: '100%',
+                                        }}
                                         value={
                                             formData[`${field.id}`] || undefined
                                         }
                                         name={`${field.id}`}
-                                        onChange={handleChange}
-                                        className="block px-4 py-3 min-w-full xl:min-w-[350px]">
-                                        <Select.Option value="">
-                                            Select an option
-                                        </Select.Option>
+                                        onChange={handleChange}>
                                         {field.select_options.map(
                                             (option, index) => (
-                                                <Select.Option
+                                                <option
                                                     key={index}
                                                     value={option.value}>
                                                     {option.key}
-                                                </Select.Option>
+                                                </option>
                                             )
                                         )}
-                                    </Select>
-                                </Form.Item>
+                                    </select>
+                                </div>
                             ) : field.field_type === 'textarea' ? (
                                 <Form.Item
                                     name={`${field.id}`}

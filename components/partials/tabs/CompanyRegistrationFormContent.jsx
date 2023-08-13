@@ -290,6 +290,14 @@ const CompanyRegistrationFormContent = ({
         }));
     };
 
+    const [searchCheckboxTerms, setSearchCheckboxTerms] = useState({});
+
+    const handleSearchCheckboxChange = (fieldId, value) => {
+        setSearchCheckboxTerms((prevSearchTerms) => ({
+            ...prevSearchTerms,
+            [fieldId]: value,
+        }));
+    };
     return (
         <>
             <div className="ps-page__dashboard mb-5">
@@ -381,6 +389,9 @@ const CompanyRegistrationFormContent = ({
                                                                 name={`${field.id}`}
                                                                 className="form-control"
                                                                 type={file}
+                                                                style={{
+                                                                    paddingTop: '10px',
+                                                                }}
                                                                 placeholder={
                                                                     field.input_placeholder
                                                                 }
@@ -423,42 +434,44 @@ const CompanyRegistrationFormContent = ({
                                             ) : field.field_type ===
                                               'select' ? (
                                                 <>
-                                                    <div className="form-group">
-                                                        <Select
-                                                            placeholder="Select an option"
-                                                            style={{
-                                                                width: '100%',
-                                                            }}
-                                                            value={
-                                                                formData[
-                                                                    `${field.id}`
-                                                                ] || undefined
-                                                            }
-                                                            name={`${field.id}`}
-                                                            onChange={
-                                                                handleChange
-                                                            }>
-                                                            {field.select_options.map(
-                                                                (
-                                                                    option,
-                                                                    index
-                                                                ) => (
-                                                                    <Option
-                                                                        name={`${field.id}`}
-                                                                        key={
-                                                                            index
-                                                                        }
-                                                                        value={
-                                                                            option.value
-                                                                        }>
-                                                                        {
-                                                                            option.key
-                                                                        }
-                                                                    </Option>
-                                                                )
-                                                            )}
-                                                        </Select>
-                                                    </div>
+                                                      <div className="form-group">
+                                                            <select
+                                                                className="form-control"
+                                                                placeholder="Select an option"
+                                                                style={{
+                                                                    width:
+                                                                        '100%',
+                                                                }}
+                                                                value={
+                                                                    formData[
+                                                                        `${field.id}`
+                                                                    ] ||
+                                                                    undefined
+                                                                }
+                                                                name={`${field.id}`}
+                                                                onChange={
+                                                                    handleChange
+                                                                }>
+                                                                {field.select_options.map(
+                                                                    (
+                                                                        option,
+                                                                        index
+                                                                    ) => (
+                                                                        <option
+                                                                            key={
+                                                                                index
+                                                                            }
+                                                                            value={
+                                                                                option.value
+                                                                            }>
+                                                                            {
+                                                                                option.key
+                                                                            }
+                                                                        </option>
+                                                                    )
+                                                                )}
+                                                            </select>
+                                                        </div>
                                                 </>
                                             ) : field.field_type ===
                                               'textarea' ? (
@@ -514,6 +527,22 @@ const CompanyRegistrationFormContent = ({
                                             ) : field.field_type ===
                                               'checkbox' ? (
                                                 <>
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Search"
+                                                        className="form-control mb-3 mt-3"
+                                                        value={
+                                                            searchCheckboxTerms[
+                                                                field.id
+                                                            ] || ''
+                                                        }
+                                                        onChange={(e) =>
+                                                            handleSearchCheckboxChange(
+                                                                field.id,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    />
                                                     <div
                                                         className={`form-group`}
                                                         style={{
@@ -545,54 +574,73 @@ const CompanyRegistrationFormContent = ({
                                                                           'column',
                                                                   }),
                                                         }}>
-                                                        {field.checkbox_label.map(
-                                                            (label, index) => {
-                                                                const isChecked =
-                                                                    formData[
-                                                                        field.id
-                                                                    ] &&
-                                                                    formData[
-                                                                        field.id
-                                                                    ].includes(
-                                                                        label.value
-                                                                    ); // Kontrol için value değerini formData içinde ara
-
-                                                                return (
-                                                                    <Checkbox
-                                                                        key={
-                                                                            index
-                                                                        }
-                                                                        name={`${field.id}`}
-                                                                        value={
+                                                        {field.checkbox_label
+                                                            .filter((label) =>
+                                                                label.option
+                                                                    .toLowerCase()
+                                                                    .includes(
+                                                                        (
+                                                                            searchCheckboxTerms[
+                                                                                field
+                                                                                    .id
+                                                                            ] ||
+                                                                            ''
+                                                                        ).toLowerCase()
+                                                                    )
+                                                            )
+                                                            .map(
+                                                                (
+                                                                    label,
+                                                                    index
+                                                                ) => {
+                                                                    const isChecked =
+                                                                        formData[
+                                                                            field
+                                                                                .id
+                                                                        ] &&
+                                                                        formData[
+                                                                            field
+                                                                                .id
+                                                                        ].includes(
                                                                             label.value
-                                                                        }
-                                                                        checked={
-                                                                            isChecked
-                                                                        }
-                                                                        onChange={() =>
-                                                                            toggleCheckbox(
-                                                                                field.id,
+                                                                        ); // Kontrol için value değerini formData içinde ara
+
+                                                                    return (
+                                                                        <Checkbox
+                                                                            key={
+                                                                                index
+                                                                            }
+                                                                            name={`${field.id}`}
+                                                                            value={
                                                                                 label.value
-                                                                            )
-                                                                        }>
-                                                                        {field.checkbox_link ? (
-                                                                            <a
-                                                                                href={
-                                                                                    field.checkbox_link
-                                                                                }
-                                                                                target="_blank"
-                                                                                className="text-primary">
-                                                                                {
-                                                                                    label.option
-                                                                                }
-                                                                            </a>
-                                                                        ) : (
-                                                                            label.option
-                                                                        )}
-                                                                    </Checkbox>
-                                                                );
-                                                            }
-                                                        )}
+                                                                            }
+                                                                            checked={
+                                                                                isChecked
+                                                                            }
+                                                                            onChange={() =>
+                                                                                toggleCheckbox(
+                                                                                    field.id,
+                                                                                    label.value
+                                                                                )
+                                                                            }>
+                                                                            {field.checkbox_link ? (
+                                                                                <a
+                                                                                    href={
+                                                                                        field.checkbox_link
+                                                                                    }
+                                                                                    target="_blank"
+                                                                                    className="text-primary">
+                                                                                    {
+                                                                                        label.option
+                                                                                    }
+                                                                                </a>
+                                                                            ) : (
+                                                                                label.option
+                                                                            )}
+                                                                        </Checkbox>
+                                                                    );
+                                                                }
+                                                            )}
                                                     </div>
                                                 </>
                                             ) : null}

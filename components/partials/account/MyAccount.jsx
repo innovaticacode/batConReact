@@ -4,10 +4,12 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
-import DashboardContent from '../tabs/DashboardContent ';
+import DashboardContent from '../tabs/DashboardContent';
 import FirstRegistrationFormContent from '../tabs/FirstRegistrationFormContent';
 import { notification } from 'antd';
 import CompanyRegistrationFormContent from '../tabs/CompanyRegistrationFormContent';
+import CreateProduct from '../tabs/CreateProduct';
+import MyProducts from '../tabs/MyProducts';
 
 const MyAccount = () => {
     const API_URL = 'http://127.0.0.1:8000/api/';
@@ -40,18 +42,25 @@ const MyAccount = () => {
                 setActiveAccount(true);
             }
         }
+
+        function kebabToCamel(kebabCase) {
+            return kebabCase.replace(/-([a-z])/g, (match, letter) =>
+                letter.toUpperCase()
+            );
+        }
+
         const userPermissionData =
             user?.rolePermissions.map((permission) => {
                 const key = permission.permissions[0].title;
-                const slug = key
-                    .split(/(?=[A-Z])/)
-                    .map((part) => part.toLowerCase())
-                    .join('-');
+                const kebabCase = key.toLowerCase().split(' ').join('-');
+
+                const slug = kebabToCamel(kebabCase);
+
                 return { key, slug };
             }) || [];
 
+        console.log(userPermissionData);
         setPermissions(userPermissionData);
-        console.log(permissions);
     }, [user]);
 
     if (!user) {
@@ -100,7 +109,7 @@ const MyAccount = () => {
     };
 
     return (
-        <section className="ps-my-account ps-page--account">
+        <section className="ps-my-account ps-page--account ps-section--account">
             <div className="container">
                 <div className="row">
                     <div className="col-lg-3 col-md-12">
@@ -183,9 +192,20 @@ const MyAccount = () => {
                                         {activeAccount &&
                                             permissions.length > 0 &&
                                             permissions.map((permission) => (
-                                                <li key={permission.key}>
+                                                <li
+                                                    key={permission.key}
+                                                    className={
+                                                        activeContent ===
+                                                        permission.slug
+                                                            ? 'active'
+                                                            : ''
+                                                    }>
                                                     <a
-                                                        href={`/${permission.slug}`}>
+                                                        onClick={() =>
+                                                            handleContentChange(
+                                                                permission.slug
+                                                            )
+                                                        }>
                                                         {permission.key}
                                                     </a>
                                                 </li>
@@ -222,6 +242,12 @@ const MyAccount = () => {
                                         updateUserAndActiveAccount
                                     }
                                 />
+                            )}
+                            {activeContent === 'createProduct' && (
+                                <CreateProduct user={user} />
+                            )}
+                            {activeContent === 'myProducts' && (
+                                <MyProducts user={user} />
                             )}
                         </div>
                     </div>

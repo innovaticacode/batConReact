@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
 import { Form, Input, notification } from 'antd';
@@ -8,24 +8,21 @@ import Cookies from 'js-cookie';
 
 const API_URL = 'http://127.0.0.1:8000/api/';
 
-class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    handleFeatureWillUpdate(e) {
+    const handleFeatureWillUpdate = (e) => {
         e.preventDefault();
         e.stopPropagation();
         notification.open({
-            message: 'Opp! Something went wrong.',
+            message: 'Oops! Something went wrong.',
             description: 'This feature has been updated later!',
             duration: 500,
         });
-    }
+    };
 
-    handleLoginSubmit = async (values) => {
-        const { email, password } = values;
+    const handleLoginSubmit = async () => {
         try {
             const response = await axios.post(API_URL + 'login', {
                 email,
@@ -59,139 +56,133 @@ class Login extends Component {
         }
     };
 
-    render() {
-        return (
-            <div className="ps-my-account">
-                <div className="container">
-                    <Form
-                        className="ps-form--account"
-                        onFinish={this.handleLoginSubmit.bind(this)}>
-                        <ul className="ps-tab-list">
-                            <li className="active">
-                                <Link href="/account/login">
-                                    <a>Login</a>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/account/register">
-                                    <a>Register</a>
-                                </Link>
-                            </li>
-                        </ul>
-                        <div className="ps-tab active" id="sign-in">
-                            <div className="ps-form__content">
-                                <h5>Log In Your Account</h5>
-                                <div className="form-group">
-                                    <Form.Item
-                                        name="email"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message:
-                                                    'Please input your email!',
-                                            },
-                                        ]}>
-                                        <Input
-                                            ref={(input) =>
-                                                (this.emailInput = input)
-                                            }
-                                            className="form-control"
-                                            type="email"
-                                            placeholder="Email address"
-                                        />
-                                    </Form.Item>
-                                </div>
-                                <div className="form-group form-forgot">
-                                    <Form.Item
-                                        name="password"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message:
-                                                    'Please input your password!',
-                                            },
-                                        ]}>
-                                        <Input
-                                            className="form-control"
-                                            type="password"
-                                            placeholder="Password..."
-                                        />
-                                    </Form.Item>
-                                </div>
-                                <div className="form-group">
-                                    <div className="ps-checkbox">
-                                        <input
-                                            className="form-control"
-                                            type="checkbox"
-                                            id="remember-me"
-                                            name="remember-me"
-                                        />
-                                        <label htmlFor="remember-me">
-                                            Rememeber me
-                                        </label>
-                                    </div>
-                                </div>
-                                <div className="form-group submit">
-                                    <button
-                                        type="submit"
-                                        className="ps-btn ps-btn--fullwidth">
-                                        Login
-                                    </button>
+    return (
+        <div className="ps-my-account">
+            <div className="container">
+                <Form className="ps-form--account" onFinish={handleLoginSubmit}>
+                    <ul className="ps-tab-list">
+                        <li className="active">
+                            <Link href="/account/login">
+                                <a>Login</a>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/account/register">
+                                <a>Register</a>
+                            </Link>
+                        </li>
+                    </ul>
+                    <div className="ps-tab active" id="sign-in">
+                        <div className="ps-form__content">
+                            <h5>Log In Your Account</h5>
+                            <div className="form-group">
+                                <Form.Item
+                                    name="email"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input your email!',
+                                        },
+                                    ]}
+                                >
+                                    <Input
+                                        className="form-control"
+                                        type="email"
+                                        placeholder="Email address"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                </Form.Item>
+                            </div>
+                            <div className="form-group form-forgot">
+                                <Form.Item
+                                    name="password"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input your password!',
+                                        },
+                                    ]}
+                                >
+                                    <Input
+                                        className="form-control"
+                                        type="password"
+                                        placeholder="Password..."
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </Form.Item>
+                            </div>
+                            <div className="form-group">
+                                <div className="ps-checkbox">
+                                    <input
+                                        className="form-control"
+                                        type="checkbox"
+                                        id="remember-me"
+                                        name="remember-me"
+                                    />
+                                    <label htmlFor="remember-me">Remember me</label>
                                 </div>
                             </div>
-                            <div className="ps-form__footer">
-                                <p>Connect with:</p>
-                                <ul className="ps-list--social">
-                                    <li>
-                                        <a
-                                            className="facebook"
-                                            href="#"
-                                            onClick={(e) =>
-                                                this.handleFeatureWillUpdate(e)
-                                            }>
-                                            <i className="fa fa-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            className="google"
-                                            href="#"
-                                            onClick={(e) =>
-                                                this.handleFeatureWillUpdate(e)
-                                            }>
-                                            <i className="fa fa-google-plus"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            className="twitter"
-                                            href="#"
-                                            onClick={(e) =>
-                                                this.handleFeatureWillUpdate(e)
-                                            }>
-                                            <i className="fa fa-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            className="instagram"
-                                            href="#"
-                                            onClick={(e) =>
-                                                this.handleFeatureWillUpdate(e)
-                                            }>
-                                            <i className="fa fa-instagram"></i>
-                                        </a>
-                                    </li>
-                                </ul>
+                            <div className="form-group submit">
+                                <button
+                                    type="submit"
+                                    className="ps-btn ps-btn--fullwidth"
+                                >
+                                    Login
+                                </button>
                             </div>
                         </div>
-                    </Form>
-                </div>
+                        <div className="ps-form__footer">
+                            <p>Connect with:</p>
+                            <ul className="ps-list--social">
+                                <li>
+                                    <a
+                                        className="facebook"
+                                        href="#"
+                                        onClick={handleFeatureWillUpdate}
+                                    >
+                                        <i className="fa fa-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        className="google"
+                                        href="#"
+                                        onClick={handleFeatureWillUpdate}
+                                    >
+                                        <i className="fa fa-google-plus"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        className="twitter"
+                                        href="#"
+                                        onClick={handleFeatureWillUpdate}
+                                    >
+                                        <i className="fa fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        className="instagram"
+                                        href="#"
+                                        onClick={handleFeatureWillUpdate}
+                                    >
+                                        <i className="fa fa-instagram"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </Form>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
+
 const mapStateToProps = (state) => {
     return state.auth;
 };
+
 export default connect(mapStateToProps)(Login);
