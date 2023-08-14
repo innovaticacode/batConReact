@@ -29,12 +29,12 @@ function CreateProduct({ user }) {
     const fetchData = async () => {
         try {
             const titlesResponse = await axios.get(
-                'http://127.0.0.1:8000/api/product_form_field_active_titles'
+                'https://enisreact.innovaticacode.com/laravel/public/api/product_form_field_active_titles'
             );
             setProductFormFieldTitles(titlesResponse.data.data);
 
             const fieldsResponse = await axios.get(
-                'http://127.0.0.1:8000/api/product_form_active_fields'
+                'https://enisreact.innovaticacode.com/laravel/public/api/product_form_active_fields'
             );
             setProductFormFields(fieldsResponse.data.data);
         } catch (error) {
@@ -46,7 +46,7 @@ function CreateProduct({ user }) {
         fetchData();
         axios
             .get(
-                'http://127.0.0.1:8000/api/product_form_field_active_subtitles/',
+                'https://enisreact.innovaticacode.com/laravel/public/api/product_form_field_active_subtitles/',
                 {
                     headers: { 'Content-Type': 'application/json' },
                 }
@@ -245,7 +245,7 @@ function CreateProduct({ user }) {
 
         try {
             const response = await axios.post(
-                'http://127.0.0.1:8000/api/products',
+                'https://enisreact.innovaticacode.com/laravel/public/api/products',
                 { products: formDataArray },
                 {
                     headers: { 'Content-Type': 'multipart/form-data' },

@@ -41,7 +41,7 @@ const FirstRegistrationFormContent = ({
     const fetchData = async () => {
         try {
             const response = await axios.get(
-                `http://127.0.0.1:8000/api/first_registration_form_active_fields`,
+                `https://enisreact.innovaticacode.com/laravel/public/api/first_registration_form_active_fields`,
                 {
                     headers: { 'Content-Type': 'application/json' },
                 }
@@ -221,7 +221,7 @@ const FirstRegistrationFormContent = ({
 
         try {
             const response = await axios.post(
-                'http://127.0.0.1:8000/api/first_registration_entries',
+                'https://enisreact.innovaticacode.com/laravel/public/api/first_registration_entries',
                 { entries: formData },
                 {
                     headers: { 'Content-Type': 'multipart/form-data' },

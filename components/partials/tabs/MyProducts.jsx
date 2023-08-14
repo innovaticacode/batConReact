@@ -28,7 +28,7 @@ function Main({ user }) {
     }
 
     const fetchData = async () => {
-        axios.get('http://127.0.0.1:8000/api/users/' + user?.id).then((res) => {
+        axios.get('https://enisreact.innovaticacode.com/laravel/public/api/users/' + user?.id).then((res) => {
             setGetProducts(res.data.data.products);
         });
     };
@@ -39,7 +39,7 @@ function Main({ user }) {
 
     const handleDelete = () => {
         axios
-            .delete('http://127.0.0.1:8000/api/products/' + getProductId)
+            .delete('https://enisreact.innovaticacode.com/laravel/public/api/products/' + getProductId)
             .then((res) => {
                 console.log(res);
                 if (res.data.status == 204) {

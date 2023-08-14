@@ -12,7 +12,7 @@ import CreateProduct from '../tabs/CreateProduct';
 import MyProducts from '../tabs/MyProducts';
 
 const MyAccount = () => {
-    const API_URL = 'http://127.0.0.1:8000/api/';
+    const API_URL = 'https://enisreact.innovaticacode.com/laravel/public/api/';
     const login = useSelector((state) => state.auth.user);
     const [user, setUser] = useState(login);
     const router = useRouter();

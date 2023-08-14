@@ -26,7 +26,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionTypes, setUser } from '~/store/auth/action';
 import { useRouter } from 'next/router';
 
-const API_URL = 'http://127.0.0.1:8000/api/';
+const API_URL = 'https://enisreact.innovaticacode.com/laravel/public/api/';
 
 function App({ Component, pageProps }) {
     const dispatch = useDispatch();

@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 
 const MyAccount = () => {
-    const API_URL = 'http://127.0.0.1:8000/api/';
+    const API_URL = 'https://enisreact.innovaticacode.com/laravel/public/api/';
     const user = useSelector((state) => state.auth.user);
     const [activeAccount, setActiveAccount] = useState(false);
     const [

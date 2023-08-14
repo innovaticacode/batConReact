@@ -35,7 +35,7 @@ const EditProduct = ({ product, onCancel, user }) => {
     const fetchProduct = async () => {
         try {
             const response = await axios.get(
-                `http://127.0.0.1:8000/api/products/${product.id}`,
+                `https://enisreact.innovaticacode.com/laravel/public/api/products/${product.id}`,
                 {
                     headers: { 'Content-Type': 'application/json' },
                 }
@@ -201,7 +201,7 @@ const EditProduct = ({ product, onCancel, user }) => {
 
         await axios
             .put(
-                `http://127.0.0.1:8000/api/products/${product.id}`,
+                `https://enisreact.innovaticacode.com/laravel/public/api/products/${product.id}`,
                 { updatedData }, // Güncellenmiş verileri JSON olarak gönderin
                 {
                     headers: { 'Content-Type': 'application/json' },
@@ -937,6 +937,8 @@ const EditProduct = ({ product, onCancel, user }) => {
                         </div>
 
                         <div className="d-flex justify-content-between w-100">
+                                                       <Button onClick={onCancel}>Cancel</Button>
+
                             <Button
                                 variant="primary"
                                 onClick={handleEdit}
@@ -947,7 +949,6 @@ const EditProduct = ({ product, onCancel, user }) => {
                     </form>
                 </div>
             </div>
-            <Button onClick={onCancel}>Cancel</Button>
         </div>
     );
 };
